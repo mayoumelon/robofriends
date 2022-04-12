@@ -20,6 +20,12 @@ const [searchfield, setSearchfield] = useState('');
   //     .then(response => response.json())
   //     .then(users => this.setState( { robots: users } ));
   // }
+useEffect(() => {
+  fetch('https://jsonplaceholder.typicode.com/users')
+  .then(response => response.json())
+  .then(users => setRobots(users));
+  console.log(robots, searchfield);
+}, []);
 
   const onSearchChange = (event) => {
     setSearchfield(event.target.value);
@@ -29,7 +35,6 @@ const [searchfield, setSearchfield] = useState('');
     return robot.name.toLowerCase().includes(searchfield.toLowerCase())
   });
 
-  console.log(robots, searchfield);
   return !robots.length ?
   <h1>Loading</h1> :
   (
